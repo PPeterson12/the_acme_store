@@ -81,6 +81,13 @@ const fetchFavorites = async (id) => {
   return response.rows;
 };
 
+const deleteFavorites = async ({ id, users_id }) => {
+  const SQL = `
+    DELETE FROM favorites
+    WHERE id = $1 AND users_id = $2
+  `;
+  await client.query(SQL, [id, users_id]);
+};
 module.exports = {
   client,
   createTables,
@@ -90,4 +97,5 @@ module.exports = {
   fetchUsers,
   fetchProducts,
   fetchFavorites,
+  deleteFavorites,
 };
